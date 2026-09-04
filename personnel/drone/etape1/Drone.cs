@@ -30,15 +30,15 @@ namespace etape1
         }
 
 
-        public void change()
+        public void Change()
         {
+            if (_battery <= 0) return;
             _battery -= 2;
             _posX += 1;
         }
 
-        public void draw()
+        public void Draw()
         {
-            Console.Clear();
             if (Battery > 0)
             {
                 Console.SetCursorPosition(_posX, _posY);
