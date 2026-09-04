@@ -15,9 +15,12 @@ namespace etape1
         {
             Drone drone = new Drone();
 
-            drone.change();
-            drone.draw();
-            Thread.Sleep(1000);
+            while (drone.Battery > 0)
+            {
+                drone.change();
+                drone.draw();
+                Thread.Sleep(1000);
+            }
         }
     }
 }

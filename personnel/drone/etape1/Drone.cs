@@ -13,6 +13,8 @@ namespace etape1
         private int _posY;
         private int _battery;
 
+        public int Battery { get => _battery; }
+
         public Drone(int posX, int posY, int battery)
         {
             this._posX = posX;
@@ -30,14 +32,14 @@ namespace etape1
 
         public void change()
         {
-            _battery =- 2;
-            _posX =+ 1;
+            _battery -= 2;
+            _posX += 1;
         }
 
         public void draw()
         {
             Console.Clear();
-            if (_battery > 0)
+            if (Battery > 0)
             {
                 Console.SetCursorPosition(_posX, _posY);
                 Console.WriteLine("x-o-x");
