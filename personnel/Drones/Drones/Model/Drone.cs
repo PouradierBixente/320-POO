@@ -12,7 +12,7 @@ namespace Drones
         private int _y;                                 // Position en Y depuis le haut de l'espace aérien
         private int _xobjectif;
         private int _yobjectif;
-        private const int SPEED = 1;
+        private const int SPEED = 10;
 
 
         // Constructeur
@@ -34,13 +34,13 @@ namespace Drones
         {
             if (_charge <= 0 || (_x == _xobjectif && _y == _yobjectif)) return;                     // S'il n'a plus de charge, il ne peut plus bouger
             if (_x > _xobjectif && _x != _xobjectif)
-                _x = _x - (_xobjectif / SPEED) / 2;
+                _x = _x - ((_x - _xobjectif) / SPEED);
             else if (_x < _xobjectif && _x != _xobjectif)
-                _x = _x + (_xobjectif / SPEED) / 2;
+                _x = _x + ((_x + _xobjectif) / SPEED);
             if (_y > _yobjectif && _y != _yobjectif)
-                _y = _y - (_yobjectif / SPEED) / 2;
+                _y = _y - ((_y - _yobjectif) / SPEED);
             else if (_y < _yobjectif && _y != _yobjectif)
-                _y = _y + (_yobjectif / SPEED) / 2;
+                _y = _y + ((_y + _yobjectif) / SPEED);
             _charge--;                                  // Il a dépensé de l'énergie
         }
 
