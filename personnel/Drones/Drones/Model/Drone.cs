@@ -12,6 +12,7 @@ namespace Drones
         private int _y;                                 // Position en Y depuis le haut de l'espace aérien
         private int _xobjectif;
         private int _yobjectif;
+        private const int SPEED = 1;
 
 
         // Constructeur
@@ -31,9 +32,15 @@ namespace Drones
         // que 'interval' millisecondes se sont écoulées
         public void Update(int interval)
         {
-            if (_charge <= 0) return;                     // S'il n'a plus de charge, il ne peut plus bouger
-            _x += 2;                                    // Il s'est déplacé de 2 pixels vers la droite
-            _y += GeneratorHelpers.Generating(5)-2;                     // Il s'est déplacé d'une valeur aléatoire vers le haut ou le bas
+            if (_charge <= 0 || (_x == _xobjectif && _y == _yobjectif)) return;                     // S'il n'a plus de charge, il ne peut plus bouger
+            if (_x > _xobjectif && _x != _xobjectif)
+                _x = _x - (_xobjectif / SPEED) / 2;
+            else if (_x < _xobjectif && _x != _xobjectif)
+                _x = _x + (_xobjectif / SPEED) / 2;
+            if (_y > _yobjectif && _y != _yobjectif)
+                _y = _y - (_yobjectif / SPEED) / 2;
+            else if (_y < _yobjectif && _y != _yobjectif)
+                _y = _y + (_yobjectif / SPEED) / 2;
             _charge--;                                  // Il a dépensé de l'énergie
         }
 
