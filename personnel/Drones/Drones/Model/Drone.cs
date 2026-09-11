@@ -14,11 +14,10 @@ namespace Drones
         // Constructeur
         public Drone(int x, int y, string name)
         {
-            Random alea = new Random();
             this._x = x;
             this._y = y;
             this._name = name;
-            _charge = alea.Next(1000); // La charge initiale de la batterie est choisie aléatoirement
+            _charge = GeneratorHelpers.Generating(1000); // La charge initiale de la batterie est choisie aléatoirement
         }
 
         #region ================ Modelisation du drone et de son comportement ================
@@ -28,9 +27,8 @@ namespace Drones
         public void Update(int interval)
         {
             if (_charge <= 0) return;                     // S'il n'a plus de charge, il ne peut plus bouger
-            Random alea = new Random();
             _x += 2;                                    // Il s'est déplacé de 2 pixels vers la droite
-            _y += alea.Next(-2, 3);                     // Il s'est déplacé d'une valeur aléatoire vers le haut ou le bas
+            _y += GeneratorHelpers.Generating(5)-2;                     // Il s'est déplacé d'une valeur aléatoire vers le haut ou le bas
             _charge--;                                  // Il a dépensé de l'énergie
         }
 
