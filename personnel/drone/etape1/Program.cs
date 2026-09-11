@@ -13,19 +13,12 @@ namespace etape1
     {
         static void Main(string[] args)
         {
-            Drone[] drones = new Drone[] { 
+            List<Drone> drones = new List<Drone> { 
                 new Drone(5, 10, 50), 
                 new Drone(8, 20, 20),
-                new Drone(10, 0, 40),
-                new Drone(6, 80, 80),
-                new Drone(7, 70, 70),
-                new Drone(9, 50, 30),
-                new Drone(15, 100, 40),
-                new Drone(2, 90, 10),
-                new Drone(0, 15, 5),
-                new Drone(1, 40, 30),
             };
 
+            int count = 0;
            
             while (OneIsAlive(drones))
             {
@@ -38,10 +31,16 @@ namespace etape1
                 }
 
                 Thread.Sleep(100);
+                count++;
+
+                if (count == 10){
+                    drones.Add(new Drone(5, 10, 50));
+                }
+
             }
         }
 
-        static bool OneIsAlive(Drone[] drones)
+        static bool OneIsAlive(List<Drone> drones)
         {
             foreach (Drone drone in drones)
             {
