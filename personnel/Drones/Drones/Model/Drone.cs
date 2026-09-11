@@ -10,12 +10,17 @@ namespace Drones
         private string _name;                           // Un nom
         private int _x;                                 // Position en X depuis la gauche de l'espace aérien
         private int _y;                                 // Position en Y depuis le haut de l'espace aérien
+        private int _xobjectif;
+        private int _yobjectif;
+
 
         // Constructeur
         public Drone(int x, int y, string name)
         {
             this._x = x;
             this._y = y;
+            this._xobjectif = GeneratorHelpers.Generating(Config.AIRSPACE_WIDTH);
+            this._yobjectif = GeneratorHelpers.Generating(Config.AIRSPACE_HEIGHT);
             this._name = name;
             _charge = GeneratorHelpers.Generating(Config.MAX_LOAD); // La charge initiale de la batterie est choisie aléatoirement
         }
