@@ -17,7 +17,7 @@ namespace Drones
             this._x = x;
             this._y = y;
             this._name = name;
-            _charge = GeneratorHelpers.Generating(1000); // La charge initiale de la batterie est choisie aléatoirement
+            _charge = GeneratorHelpers.Generating(Config.MAX_LOAD); // La charge initiale de la batterie est choisie aléatoirement
         }
 
         #region ================ Modelisation du drone et de son comportement ================
