@@ -32,15 +32,15 @@ namespace Drones
         // que 'interval' millisecondes se sont écoulées
         public void Update(int interval)
         {
-            if (_charge <= 0 || (_x == _xobjectif && _y == _yobjectif)) return;                     // S'il n'a plus de charge, il ne peut plus bouger
+            if (_charge <= 0 || (_x == _xobjectif && _y == _yobjectif) || (_x + SPEED / 1000 == _xobjectif && _y + SPEED / 1000 == _yobjectif) || (_x - SPEED / 1000 == _xobjectif && _y - SPEED / 1000 == _yobjectif) || (_x + SPEED / 1000 == _xobjectif && _y - SPEED / 1000 == _yobjectif) || (_x - SPEED / 1000 == _xobjectif && _y + SPEED / 1000 == _yobjectif)) return;                     // S'il n'a plus de charge, il ne peut plus bouger
             if (_x > _xobjectif && _x != _xobjectif)
-                _x = _x - ((_x - _xobjectif) / SPEED);
+                _x = _x - ((_x - _xobjectif) * SPEED * interval / 1000);
             else if (_x < _xobjectif && _x != _xobjectif)
-                _x = _x + ((_x + _xobjectif) / SPEED);
+                _x = _x + ((_x + _xobjectif) * SPEED * interval / 1000);
             if (_y > _yobjectif && _y != _yobjectif)
-                _y = _y - ((_y - _yobjectif) / SPEED);
+                _y = _y - ((_y - _yobjectif) * SPEED * interval / 1000);
             else if (_y < _yobjectif && _y != _yobjectif)
-                _y = _y + ((_y + _yobjectif) / SPEED);
+                _y = _y + ((_y + _yobjectif) * SPEED * interval / 1000);
             _charge--;                                  // Il a dépensé de l'énergie
         }
 
