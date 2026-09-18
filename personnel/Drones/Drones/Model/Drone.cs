@@ -22,9 +22,9 @@ namespace Drones
         {
             this._x = x;
             this._y = y;
+            this._name = name;
             this._xobjectif = GeneratorHelpers.Generating(Config.AIRSPACE_WIDTH);
             this._yobjectif = GeneratorHelpers.Generating(Config.AIRSPACE_HEIGHT);
-            this._name = name;
             _state = State.ROAMING;
             _charge = GeneratorHelpers.Generating(Config.MAX_LOAD); // La charge initiale de la batterie est choisie aléatoirement
         }
@@ -35,6 +35,8 @@ namespace Drones
         // que 'interval' millisecondes se sont écoulées
         public void Update(int interval)
         {
+            
+
             if (_charge <= 0) return;                     // S'il n'a plus de charge, il ne peut plus bouger
 
             double distance = MathHelpers.Distance(_x, _y, _xobjectif, _yobjectif);
@@ -43,6 +45,11 @@ namespace Drones
             {
                 _x = _xobjectif;
                 _y = _yobjectif;
+                if (_state == State.ROAMING)
+                {
+                    this._xobjectif = GeneratorHelpers.Generating(Config.AIRSPACE_WIDTH);
+                    this._yobjectif = GeneratorHelpers.Generating(Config.AIRSPACE_HEIGHT);
+                }
                 return;                                   // Le drone s'immobilise
             }
 
