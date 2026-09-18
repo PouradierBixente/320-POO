@@ -23,8 +23,7 @@ namespace Drones
             this._x = x;
             this._y = y;
             this._name = name;
-            this._xobjectif = GeneratorHelpers.Generating(Config.AIRSPACE_WIDTH);
-            this._yobjectif = GeneratorHelpers.Generating(Config.AIRSPACE_HEIGHT);
+            (_xobjectif, _yobjectif) = newtarget();
             _state = State.ROAMING;
             _charge = GeneratorHelpers.Generating(Config.MAX_LOAD); // La charge initiale de la batterie est choisie aléatoirement
         }
@@ -47,8 +46,7 @@ namespace Drones
                 _y = _yobjectif;
                 if (_state == State.ROAMING)
                 {
-                    this._xobjectif = GeneratorHelpers.Generating(Config.AIRSPACE_WIDTH);
-                    this._yobjectif = GeneratorHelpers.Generating(Config.AIRSPACE_HEIGHT);
+                    (_xobjectif, _yobjectif) = newtarget();
                 }
                 return;                                   // Le drone s'immobilise
             }
@@ -82,5 +80,9 @@ namespace Drones
         }
         #endregion
 
+        private (int, int) newtarget()
+        {
+              return(GeneratorHelpers.Generating(Config.AIRSPACE_WIDTH), GeneratorHelpers.Generating(Config.AIRSPACE_HEIGHT));
+        } 
     }
 }
