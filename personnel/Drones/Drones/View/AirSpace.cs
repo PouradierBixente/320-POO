@@ -1,3 +1,4 @@
+using Charger;
 using Drones.Helpers;
 
 namespace Drones
@@ -39,6 +40,8 @@ namespace Drones
             {
                 drone.Render(airspace);
             }
+
+            Charger.Render(airspace);
 
             airspace.Render();
         }
