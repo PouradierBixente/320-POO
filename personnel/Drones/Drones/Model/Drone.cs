@@ -13,12 +13,13 @@ namespace Drones
         private int _xobjectif;
         private int _yobjectif;
         private State _state;
+        private Charger _charger;
 
         enum State { CRASH, LOW_BATTERIE, LOADING, ROAMING }
 
 
         // Constructeur
-        public Drone(int x, int y, string name)
+        public Drone(int x, int y, string name, Charger charger)
         {
             this._x = x;
             this._y = y;
@@ -26,6 +27,7 @@ namespace Drones
             (_xobjectif, _yobjectif) = newtarget();
             _state = State.ROAMING;
             _charge = GeneratorHelpers.Generating(Config.MAX_LOAD); // La charge initiale de la batterie est choisie aléatoirement
+            this._charger = _charger;
         }
 
         #region ================ Modelisation du drone et de son comportement ================
@@ -47,6 +49,10 @@ namespace Drones
                 if (_state == State.ROAMING)
                 {
                     (_xobjectif, _yobjectif) = newtarget();
+                }
+                if (_state == State.LOW_BATTERIE)
+                {
+                    (_charger.X, _charger.Y) = newtarget();
                 }
                 return;                                   // Le drone s'immobilise
             }
