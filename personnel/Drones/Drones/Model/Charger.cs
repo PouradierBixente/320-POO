@@ -11,20 +11,20 @@ namespace Drones
 {
     public class Charger
     {
-        public int X;
-        public int Y;
+        private int _x;
+        private int _y;
 
         public Charger(int x, int y)
         {
-            this.X = x;
-            this.Y = y;
+            this._x = x;
+            this._y = y;
         }
 
 
         public void Render(BufferedGraphics drawingSpace)
         {
             Pen MyPen = new Pen(Color.Black, 3);
-            drawingSpace.Graphics.DrawEllipse(MyPen, X, Y, 20, 20);
+            drawingSpace.Graphics.DrawEllipse(MyPen, _x, _y, 20, 20);
         }
     }
 }
