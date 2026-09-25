@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Windows.Forms.AxHost;
 
-namespace Charger
+namespace Drones
 {
-    internal class Charger
+    public class Charger
     {
         public int X;
         public int Y;
@@ -23,7 +23,8 @@ namespace Charger
 
         public void Render(BufferedGraphics drawingSpace)
         {
-            drawingSpace.Graphics.DrawEllipse(X, Y, 20, 20);
+            Pen MyPen = new Pen(Color.Black, 3);
+            drawingSpace.Graphics.DrawEllipse(MyPen, X, Y, 20, 20);
         }
     }
 }
