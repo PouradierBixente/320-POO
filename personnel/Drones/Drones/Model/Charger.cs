@@ -7,23 +7,26 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Windows.Forms.AxHost;
 
-namespace Charger
+namespace Drones
 {
-    internal class Charger
+    public class Charger
     {
-        public int X;
-        public int Y;
+        private int X;
+        private int Y;
 
         public Charger(int x, int y)
         {
-            this.X = x;
-            this.Y = y;
+            this.X1 = x;
+            this.Y1 = y;
         }
 
+        public int X1 { get => X; set => X = value; }
+        public int Y1 { get => Y; set => Y = value; }
 
         public void Render(BufferedGraphics drawingSpace)
         {
-            drawingSpace.Graphics.DrawEllipse(X, Y, 20, 20);
+            Pen pen = new Pen(Color.Black, 3);
+            drawingSpace.Graphics.DrawEllipse(pen, X1, Y1, 20, 20);
         }
     }
 }

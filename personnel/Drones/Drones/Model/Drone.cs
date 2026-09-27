@@ -13,19 +13,23 @@ namespace Drones
         private int _xobjectif;
         private int _yobjectif;
         private State _state;
+        private Charger _Charger;
+        private int _iteration = 0;
 
         enum State { CRASH, LOW_BATTERIE, LOADING, ROAMING }
 
 
         // Constructeur
-        public Drone(int x, int y, string name)
+        public Drone(int x, int y, string name, Charger charger)
         {
             this._x = x;
             this._y = y;
             this._name = name;
-            (_xobjectif, _yobjectif) = newtarget();
+            this._Charger = charger;
             _state = State.ROAMING;
             _charge = GeneratorHelpers.Generating(Config.MAX_LOAD); // La charge initiale de la batterie est choisie aléatoirement
+            (_xobjectif, _yobjectif) = newtarget();
+            recharge();
         }
 
         #region ================ Modelisation du drone et de son comportement ================
@@ -40,6 +44,12 @@ namespace Drones
 
             double distance = MathHelpers.Distance(_x, _y, _xobjectif, _yobjectif);
 
+            if (_charge <= 300 || _state == State.LOADING)
+            {
+                (_xobjectif, _yobjectif) = newtarget();
+                recharge();
+            }
+
             if (distance <= Config.SPEED * interval / 1000)                 // L'objectif est atteint (ou tout proche)
             {
                 _x = _xobjectif;
@@ -48,6 +58,7 @@ namespace Drones
                 {
                     (_xobjectif, _yobjectif) = newtarget();
                 }
+                
                 return;                                   // Le drone s'immobilise
             }
 
@@ -82,7 +93,29 @@ namespace Drones
 
         private (int, int) newtarget()
         {
-              return(GeneratorHelpers.Generating(Config.AIRSPACE_WIDTH), GeneratorHelpers.Generating(Config.AIRSPACE_HEIGHT));
-        } 
+            if (_charge >= 300 && _state == State.ROAMING)
+            {
+                return (GeneratorHelpers.Generating(Config.AIRSPACE_WIDTH), GeneratorHelpers.Generating(Config.AIRSPACE_HEIGHT));
+            }
+            else
+            {
+                _state = State.LOW_BATTERIE;
+                return (_Charger.X1, _Charger.Y1);
+            }
+        }
+
+        private void recharge()
+        {
+            if (_x == _Charger.X1 && _y == _Charger.Y1 && _state == State.LOW_BATTERIE)
+            {
+                _state = State.LOADING;
+            }
+            if (_state == State.LOADING)
+            {
+                _charge += 10;
+                if(_charge >= 1000)
+                    _state = State.ROAMING;
+            }
+        }
     }
 }
