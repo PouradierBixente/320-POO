@@ -1,4 +1,6 @@
-﻿namespace TestProject1
+﻿using Drones;
+
+namespace TestProject1
 {
     [TestClass]
     public sealed class Test1

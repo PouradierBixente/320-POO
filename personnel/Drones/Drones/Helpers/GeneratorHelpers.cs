@@ -14,5 +14,10 @@ namespace Drones.Helpers
         public static int Generating(int max) {
             return _alea.Next(max);
         }
+
+        public static int Generating(int min, int max)
+        {
+            return _alea.Next(min, max);
+        }
     }
 }

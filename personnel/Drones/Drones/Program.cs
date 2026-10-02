@@ -22,9 +22,18 @@ namespace Drones
             
             List<Pizzeria> Pizzi = new List<Pizzeria>();
             for (int i = 0; i < 5; i++)
-                Pizzi.Add(new Pizzeria(GeneratorHelpers.Generating(Config.AIRSPACE_WIDTH - 25), GeneratorHelpers.Generating(Config.AIRSPACE_HEIGHT - 25)));
+            {
+                try
+                {
+                    Pizzeria.RegisterPizzeria(Pizzi);
+                }
+                catch
+                {
+                    i--;
+                }
+            }
 
-            List<Client> cliente = new List<Client>();
+                List<Client> cliente = new List<Client>();
             for (int i = 0; i < 20; i++)
                 cliente.Add(new Client(GeneratorHelpers.Generating(Config.AIRSPACE_WIDTH), GeneratorHelpers.Generating(Config.AIRSPACE_HEIGHT)));
 

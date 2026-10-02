@@ -36,5 +36,23 @@ namespace Drones
 
         }
         #endregion
+
+        public static void RegisterPizzeria(List<Pizzeria> Pizzi)
+        {
+            
+            int size = 25;
+            int x = GeneratorHelpers.Generating(0 + SIZEELLIPSE, Config.AIRSPACE_WIDTH - SIZEELLIPSE);
+            int y = GeneratorHelpers.Generating(0 + SIZEELLIPSE, Config.AIRSPACE_HEIGHT - SIZEELLIPSE);
+
+            foreach (Pizzeria p in Pizzi)
+            {
+                if ((x + size >= p.X - size) && (x - size <= p.X + size) && (y + size >= p.Y - size) && (y - size <= p.Y + size))
+                {
+                    throw new Exception("Pizzeria se chevauche.");
+                }
+            }
+            Pizzi.Add(new Pizzeria(x,y));
+            
+        }
     }
 }
