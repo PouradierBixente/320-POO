@@ -14,7 +14,11 @@ namespace Drones
 
         // La flotte est l'ensemble des drones qui évoluent dans notre espace aérien
         private List<Drone> fleet;
+<<<<<<< HEAD
         private Charger _charger;
+=======
+        private Charger charger;
+>>>>>>> 341c3d4d2c0a0139acc2a45688aa4ca76190f22c
 
         BufferedGraphicsContext currentContext;
         BufferedGraphics airspace;
@@ -29,7 +33,11 @@ namespace Drones
             // dimensions the same size as the drawing surface of the form.
             airspace = currentContext.Allocate(this.CreateGraphics(), this.DisplayRectangle);
             this.fleet = fleet;
+<<<<<<< HEAD
             this._charger = charger;
+=======
+            this.charger = charger;
+>>>>>>> 341c3d4d2c0a0139acc2a45688aa4ca76190f22c
         }
 
         // Affichage de la situation actuelle
@@ -43,7 +51,11 @@ namespace Drones
                 drone.Render(airspace);
             }
 
+<<<<<<< HEAD
             _charger.Render(airspace);
+=======
+            charger.Render(airspace);
+>>>>>>> 341c3d4d2c0a0139acc2a45688aa4ca76190f22c
 
             airspace.Render();
         }
