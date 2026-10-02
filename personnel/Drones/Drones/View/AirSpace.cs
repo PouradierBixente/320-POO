@@ -14,17 +14,15 @@ namespace Drones
 
         // La flotte est l'ensemble des drones qui évoluent dans notre espace aérien
         private List<Drone> fleet;
-<<<<<<< HEAD
         private Charger _charger;
-=======
-        private Charger charger;
->>>>>>> 341c3d4d2c0a0139acc2a45688aa4ca76190f22c
+        private List<Pizzeria> _pizzi;
+        private List<Client> _client;
 
         BufferedGraphicsContext currentContext;
         BufferedGraphics airspace;
 
         // Initialisation de l'espace aérien avec un certain nombre de drones
-        public AirSpace(List<Drone> fleet, Charger charger)
+        public AirSpace(List<Drone> fleet, Charger charger, List<Pizzeria> Pizzi, List<Client> cliente)
         {
             InitializeComponent();
             // Gets a reference to the current BufferedGraphicsContext
@@ -33,11 +31,9 @@ namespace Drones
             // dimensions the same size as the drawing surface of the form.
             airspace = currentContext.Allocate(this.CreateGraphics(), this.DisplayRectangle);
             this.fleet = fleet;
-<<<<<<< HEAD
             this._charger = charger;
-=======
-            this.charger = charger;
->>>>>>> 341c3d4d2c0a0139acc2a45688aa4ca76190f22c
+            _pizzi = Pizzi;
+            _client = cliente;
         }
 
         // Affichage de la situation actuelle
@@ -51,11 +47,17 @@ namespace Drones
                 drone.Render(airspace);
             }
 
-<<<<<<< HEAD
             _charger.Render(airspace);
-=======
-            charger.Render(airspace);
->>>>>>> 341c3d4d2c0a0139acc2a45688aa4ca76190f22c
+
+            foreach (Pizzeria Pizzi in _pizzi)
+            {
+                Pizzi.Render(airspace);
+            }
+
+            foreach (Client cliente in _client)
+            {
+                cliente.Render(airspace);
+            }
 
             airspace.Render();
         }
