@@ -21,6 +21,8 @@ namespace Drones
         BufferedGraphicsContext currentContext;
         BufferedGraphics airspace;
 
+        public Charger Charger { get => _charger; set => _charger = value; }
+
         // Initialisation de l'espace aérien avec un certain nombre de drones
         public AirSpace(List<Drone> fleet, Charger charger, List<Pizzeria> Pizzi, List<Client> cliente)
         {
@@ -31,7 +33,7 @@ namespace Drones
             // dimensions the same size as the drawing surface of the form.
             airspace = currentContext.Allocate(this.CreateGraphics(), this.DisplayRectangle);
             this.fleet = fleet;
-            this._charger = charger;
+            _charger = charger;
             _pizzi = Pizzi;
             _client = cliente;
         }

@@ -13,12 +13,7 @@ namespace Drones
         private int _xobjectif;
         private int _yobjectif;
         private State _state;
-<<<<<<< HEAD
         private Charger _charger;
-=======
-        private Charger _Charger;
-        private int _iteration = 0;
->>>>>>> 341c3d4d2c0a0139acc2a45688aa4ca76190f22c
 
         enum State { CRASH, LOW_BATTERIE, LOADING, ROAMING }
 
@@ -29,15 +24,13 @@ namespace Drones
             this._x = x;
             this._y = y;
             this._name = name;
-            this._Charger = charger;
+            this._charger = charger;
             _state = State.ROAMING;
             _charge = GeneratorHelpers.Generating(Config.MAX_LOAD); // La charge initiale de la batterie est choisie aléatoirement
-<<<<<<< HEAD
-            this._charger = _charger;
-=======
+
+
             (_xobjectif, _yobjectif) = newtarget();
             recharge();
->>>>>>> 341c3d4d2c0a0139acc2a45688aa4ca76190f22c
         }
 
         #region ================ Modelisation du drone et de son comportement ================
@@ -66,14 +59,12 @@ namespace Drones
                 {
                     (_xobjectif, _yobjectif) = newtarget();
                 }
-<<<<<<< HEAD
+
                 if (_state == State.LOW_BATTERIE)
                 {
                     (_charger.X, _charger.Y) = newtarget();
                 }
-=======
-                
->>>>>>> 341c3d4d2c0a0139acc2a45688aa4ca76190f22c
+
                 return;                                   // Le drone s'immobilise
             }
 
@@ -115,13 +106,13 @@ namespace Drones
             else
             {
                 _state = State.LOW_BATTERIE;
-                return (_Charger.X1, _Charger.Y1);
+                return (_charger.X, _charger.Y);
             }
         }
 
         private void recharge()
         {
-            if (_x == _Charger.X1 && _y == _Charger.Y1 && _state == State.LOW_BATTERIE)
+            if (_x == _charger.X && _y == _charger.Y && _state == State.LOW_BATTERIE)
             {
                 _state = State.LOADING;
             }
